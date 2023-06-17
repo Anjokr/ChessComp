@@ -5,6 +5,11 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "participante")
 public class Participante {
+
+    public Participante() {
+
+    }
+
     @Id
     private int numassoc;
 
@@ -12,8 +17,8 @@ public class Participante {
         return numassoc;
     }
 
-    public void setNumAssoc(int numAssoc) {
-        numassoc = numAssoc;
+    public void setNumAssoc(int numassoc) {
+        this.numassoc = numassoc;
     }
 
     @Column(name = "nomeassoc")

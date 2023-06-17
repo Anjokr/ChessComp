@@ -1,6 +1,5 @@
 package com.bd2.chesscomp.Models;
 
-import java.sql.Date;
 import java.time.*;
 
 import jakarta.persistence.*;
@@ -17,7 +16,8 @@ public class Acomoda {
     @JoinColumn(name = "enomehotel")
     private Hotel enomehotel;
 
-    @Column(name = "enumassoc")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "enumassoc", referencedColumnName = "numassoc")
     private Participante enumassoc;
 
     @Column(name = "dataentrada")

@@ -6,14 +6,15 @@ import jakarta.persistence.*;
 @Table(name = "jogador")
 public class Jogador {
     @Id
-    @Column (name = "enumassoc")
-    private int enumassoc;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "enumassoc", referencedColumnName = "numassoc")
+    private Participante enumassoc;
 
-    public int getEnumassoc() {
+    public Participante getEnumassoc() {
         return enumassoc;
     }
 
-    public void setEnumassoc(int enumassoc) {
+    public void setEnumassoc(Participante enumassoc) {
         this.enumassoc = enumassoc;
     }
 
