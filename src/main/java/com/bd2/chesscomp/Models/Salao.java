@@ -5,11 +5,11 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "salao")
 public class Salao {
-    @Id
-    @Column(name = "idsalao")
-    private int idsalao;
+	@Id
+	@Column(name = "idsalao")
+	private int idsalao;
 
-    public int getIdSalao() {
+	public int getIdSalao() {
 		return idsalao;
 	}
 
@@ -18,9 +18,9 @@ public class Salao {
 	}
 
 	@Column(name = "capacidade")
-    private int capacidade;
+	private int capacidade;
 
-    public int getCapacidade() {
+	public int getCapacidade() {
 		return capacidade;
 	}
 
@@ -29,8 +29,8 @@ public class Salao {
 	}
 
 	@ManyToOne
-    @JoinColumn(name = "enomehotel")
-    private Hotel hotel;
+	@JoinColumn(name = "enomehotel")
+	private Hotel hotel;
 
 	public Hotel getHotel() {
 		return hotel;
