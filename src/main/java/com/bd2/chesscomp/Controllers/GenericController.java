@@ -40,12 +40,6 @@ public class GenericController {
 
     @GetMapping("/getSchedule")
     public @ResponseBody List<Schedule> getSchedule() {
-        // @TODO: Pegar todos a programação de jogos e retornar para o front
-        // 1. Pega todos os jogos
-        // 2. Listamos pra cada jogo: Árbitro, Jogadores, Hotel, Salão e Horário
-
-        List<Jogador> jogadores = new ArrayList<Jogador>();
-
         List<Jogo> jogos = jogoRepository.findAll();
 
         ArrayList<Schedule> schedules = new ArrayList<Schedule>();
