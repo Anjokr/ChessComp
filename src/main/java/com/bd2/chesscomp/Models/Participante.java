@@ -75,4 +75,16 @@ public class Participante {
     public void setTipopar(String tipoPar) {
         tipopar = tipoPar;
     }
+
+    @Override
+    public String toString() {
+        return "Participante{" +
+                "numAssoc=" + numassoc +
+                ", nomeAssoc='" + nomeassoc + '\'' +
+                ", endereco='" + endereco + '\'' +
+                ", telContat='" + telcontat + '\'' +
+                ", ecodPais=" + ecodpais +
+                ", tipoPar='" + tipopar + '\'' +
+                '}';
+    }
 }

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Minha Aplicação Spring</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#getGamesByHotelForm").submit(function(event) {
+                event.preventDefault();
+                var hotelName = $("#hotelName").val();
+                $.post("/getGamesByHotel", { username: hotelName }, function(data) {
+                    // Limpar a tabela de resultados anteriores
+                    $("#gamesByHotelTable tbody").empty();
+
+                    // Preencher a tabela com os resultados
+                    $.each(data, function(index, game) {
+                        var row = "<tr>" +
+                            "<td>" + game.jogo + "</td>" +
+                            "<td>" + game.data + "</td>" +
+                            "<td>" + game.hotel + "</td>" +
+                            "<td>" + game.arbitro + "</td>" +
+                            "<td>" + game.jogador1 + "</td>" +
+                            "<td>" + game.jogador2 + "</td>" +
+                            "</tr>";
+                        $("#gamesByHotelTable tbody").append(row);
+                    });
+
+                    // Exibir a tabela de resultados
+                    $("#gamesByHotelTable").show();
+                });
+            });
+
+            $("#getGamesByPlayerForm").submit(function(event) {
+                event.preventDefault();
+                var playerName = $("#playerName").val();
+                $.post("/getGamesByPlayer", { nomejogador: playerName }, function(data) {
+                    // Limpar a tabela de resultados anteriores
+                    $("#gamesByPlayerTable tbody").empty();
+
+                    // Preencher a tabela com os resultados
+                    $.each(data, function(index, game) {
+                        var row = "<tr>" +
+                            "<td>" + game.jogo + "</td>" +
+                            "<td>" + game.data + "</td>" +
+                            "<td>" + game.hotel + "</td>" +
+                            "<td>" + game.arbitro + "</td>" +
+                            "<td>" + game.jogador1 + "</td>" +
+                            "<td>" + game.jogador2 + "</td>" +
+                            "</tr>";
+                        $("#gamesByPlayerTable tbody").append(row);
+                    });
+
+                    // Exibir a tabela de resultados
+                    $("#gamesByPlayerTable").show();
+                });
+            });
+
+            $("#getGamesByRefereeForm").submit(function(event) {
+                event.preventDefault();
+                var refereeName = $("#refereeName").val();
+                $.post("/getGamesByReferee", { nomearbitro: refereeName }, function(data) {
+                    // Limpar a tabela de resultados anteriores
+                    $("#gamesByRefereeTable tbody").empty();
+
+                    // Preencher a tabela com os resultados
+                    $.each(data, function(index, game) {
+                        var row = "<tr>" +
+                            "<td>" + game.jogo + "</td>" +
+                            "<td>" + game.data + "</td>" +
+                            "<td>" + game.hotel + "</td>" +
+                            "<td>" + game.arbitro + "</td>" +
+                            "<td>" + game.jogador1 + "</td>" +
+                            "<td>" + game.jogador2 + "</td>" +
+                            "</tr>";
+                        $("#gamesByRefereeTable tbody").append(row);
+                    });
+
+                    // Exibir a tabela de resultados
+                    $("#gamesByRefereeTable").show();
+                });
+            });
+        });
+    </script>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bem-vindo à Minha Aplicação Spring!</h1>
+
+    <h2>Agenda de Jogos</h2>
+    <ul>
+        <!-- Iterar sobre a lista de agendamentos e exibir as informações -->
+        <li th:each="schedule : ${schedules}">
+            Jogo: <span th:text="${schedule.jogo}"></span><br>
+            Data: <span th:text="${schedule.data}"></span><br>
+            Hotel: <span th:text="${schedule.hotel}"></span><br>
+            Árbitro: <span th:text="${schedule.arbitro}"></span><br>
+            Jogador 1: <span th:text="${schedule.jogador1}"></span><br>
+            Jogador 2: <span th:text="${schedule.jogador2}"></span><br>
+            <br>
+        </li>
+    </ul>
+
+    <h2>Jogos por Hotel</h2>
+    <form id="getGamesByHotelForm">
+        <label for="hotelName">Nome do Hotel:</label>
+        <input type="text" id="hotelName" name="username" required>
+        <button type="submit">Buscar Jogos</button>
+    </form>
+    <table id="gamesByHotelTable" style="display: none;">
+        <thead>
+            <tr>
+                <th>Jogo</th>
+                <th>Data</th>
+                <th>Hotel</th>
+                <th>Árbitro</th>
+                <th>Jogador 1</th>
+                <th>Jogador 2</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <h2>Jogos por Jogador</h2>
+    <form id="getGamesByPlayerForm">
+        <label for="playerName">Nome do Jogador:</label>
+        <input type="text" id="playerName" name="nomejogador" required>
+        <button type="submit">Buscar Jogos</button>
+    </form>
+    <table id="gamesByPlayerTable" style="display: none;">
+        <thead>
+            <tr>
+                <th>Jogo</th>
+                <th>Data</th>
+                <th>Hotel</th>
+                <th>Árbitro</th>
+                <th>Jogador 1</th>
+                <th>Jogador 2</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <h2>Jogos por Árbitro</h2>
+    <form id="getGamesByRefereeForm">
+        <label for="refereeName">Nome do Árbitro:</label>
+        <input type="text" id="refereeName" name="nomearbitro" required>
+        <button type="submit">Buscar Jogos</button>
+    </form>
+    <table id="gamesByRefereeTable" style="display: none;">
+        <thead>
+            <tr>
+                <th>Jogo</th>
+                <th>Data</th>
+                <th>Hotel</th>
+                <th>Árbitro</th>
+                <th>Jogador 1</th>
+                <th>Jogador 2</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</body>
+</html>

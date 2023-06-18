@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Agenda de Jogos</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Agenda de Jogos</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Jogo</th>
+                <th>Data</th>
+                <th>Hotel</th>
+                <th>Árbitro</th>
+                <th>Jogador 1</th>
+                <th>Jogador 2</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Iterar sobre a lista de agendamentos e exibir as informações -->
+            <tr th:each="schedule : ${schedules}">
+                <td th:text="${schedule.jogo}"></td>
+                <td th:text="${schedule.data}"></td>
+                <td th:text="${schedule.hotel}"></td>
+                <td th:text="${schedule.arbitro}"></td>
+                <td th:text="${schedule.jogador1}"></td>
+                <td th:text="${schedule.jogador2}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

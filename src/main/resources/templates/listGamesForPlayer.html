@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>List View</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>List View</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID Jogo</th>
+                <th>ID Salao</th>
+                <th>Entradas Vendidas</th>
+                <th>Dia</th>
+                <th>Mês</th>
+                <th>Ano</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <!-- <c:forEach items="${jogos}" var="item"> -->
+                <tr th:each="item : ${jogos}">
+                    <td><span th:text=${item.idJogo}> ID Jogo </span></td>
+                    <td><span th:text=${item.salao.idSalao}>ID Salão</span></td>
+                    <td><span th:text=${item.entrVend}>Entradas Vendidas</span> </td>
+                    <td><span th:text=${item.diaJorn}> Dia</span></td>
+                    <td><span th:text=${item.mesJorn}>Mês</span></td>
+                    <td><span th:text=${item.anoJorn}>Ano</span></td>
+                </tr>
+            <!-- </c:forEach> -->
+        </tbody>
+    </table>
+</body>
+</html>
