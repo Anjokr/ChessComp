@@ -70,18 +70,28 @@ public class GenericController {
     }
 
     @GetMapping("/getGamesByHotel")
-    public @ResponseBody List<Jogo> getGamesByHotel(@RequestBody Hotel hotel) {
+    public @ResponseBody List<Jogo> getGamesByHotel(@RequestBody String nomeHotel) {
 
-        return null;
+        List<Jogo> jogos = hotelRepository.findJogosByHotel(nomeHotel);
+
+        return jogos;
     }
 
     @GetMapping("/getGamesByPlayer")
-    public ResponseEntity<Jogo> getGamesByPlayer(@RequestBody Jogador jogador) {
-        return new ResponseEntity<Jogo>(null);
+    public @ResponseBody List<Jogo> getGamesByPlayer(@RequestBody String nomejogador) {
+        int numassoc = participanteRepository.findEnumParticipanteByNomeAssoc(nomejogador);
+
+        List<Jogo> jogos = jogoRepository.findJogosByJogador(numassoc);
+
+        return jogos;
     }
 
     @GetMapping("/getGamesByReferee")
-    public ResponseEntity<Jogo> getGamesByReferee(@RequestBody Participante participante) {
-        return new ResponseEntity<Jogo>(null);
+    public @ResponseBody List<Jogo> getGamesByReferee(@RequestBody String nomearbitro) {
+        int numassoc = participanteRepository.findEnumParticipanteByNomeAssoc(nomearbitro);
+
+        List<Jogo> jogos = jogoRepository.findJogosByArbitro(numassoc);
+
+        return jogos;
     }
 }

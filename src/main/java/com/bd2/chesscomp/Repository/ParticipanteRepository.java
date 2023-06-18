@@ -12,4 +12,7 @@ public interface ParticipanteRepository extends JpaRepository<Participante, Inte
 
     @Query("SELECT p.nomeassoc FROM Participante p WHERE p.numassoc = :enumJogador")
     String findNomeAssocByEnumJogador(@Param("enumJogador") Integer enumJogador);
+
+    @Query("SELECT p.numassoc FROM Participante p WHERE p.nomeassoc = :nomeAssoc")
+    Integer findEnumParticipanteByNomeAssoc(@Param("nomeAssoc") String nomeAssoc);
 }
