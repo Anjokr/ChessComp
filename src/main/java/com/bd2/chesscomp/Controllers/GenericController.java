@@ -3,17 +3,14 @@ package com.bd2.chesscomp.Controllers;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import com.bd2.chesscomp.Models.Participante;
-import com.bd2.chesscomp.Models.Hotel;
 import com.bd2.chesscomp.Models.Joga;
-import com.bd2.chesscomp.Models.Jogador;
 import com.bd2.chesscomp.Models.Jogo;
 import com.bd2.chesscomp.Models.Schedule;
 import com.bd2.chesscomp.Repository.HotelRepository;
@@ -69,16 +66,16 @@ public class GenericController {
         return schedules;
     }
 
-    @GetMapping("/getGamesByHotel")
-    public @ResponseBody List<Jogo> getGamesByHotel(@RequestBody String nomeHotel) {
+    @PostMapping("/getGamesByHotel")
+    public @ResponseBody List<Jogo> getGamesByHotel(@RequestParam("username") String nomeHotel) {
 
         List<Jogo> jogos = hotelRepository.findJogosByHotel(nomeHotel);
 
         return jogos;
     }
 
-    @GetMapping("/getGamesByPlayer")
-    public @ResponseBody List<Jogo> getGamesByPlayer(@RequestBody String nomejogador) {
+    @PostMapping("/getGamesByPlayer")
+    public @ResponseBody List<Jogo> getGamesByPlayer(@RequestParam String nomejogador) {
         int numassoc = participanteRepository.findEnumParticipanteByNomeAssoc(nomejogador);
 
         List<Jogo> jogos = jogoRepository.findJogosByJogador(numassoc);
@@ -86,8 +83,8 @@ public class GenericController {
         return jogos;
     }
 
-    @GetMapping("/getGamesByReferee")
-    public @ResponseBody List<Jogo> getGamesByReferee(@RequestBody String nomearbitro) {
+    @PostMapping("/getGamesByReferee")
+    public @ResponseBody List<Jogo> getGamesByReferee(@RequestParam String nomearbitro) {
         int numassoc = participanteRepository.findEnumParticipanteByNomeAssoc(nomearbitro);
 
         List<Jogo> jogos = jogoRepository.findJogosByArbitro(numassoc);

@@ -1,5 +1,7 @@
 package com.bd2.chesscomp.Repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,4 +17,7 @@ public interface ParticipanteRepository extends JpaRepository<Participante, Inte
 
     @Query("SELECT p.numassoc FROM Participante p WHERE p.nomeassoc = :nomeAssoc")
     Integer findEnumParticipanteByNomeAssoc(@Param("nomeAssoc") String nomeAssoc);
+
+    @Query("SELECT p.ecodpais, COUNT(p) FROM Participante p GROUP BY p.ecodpais")
+    List<Object[]> getPlayersByCountry();
 }

@@ -5,11 +5,11 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "pais")
 public class Pais {
-    @Id
-    @Column(name = "numpais")
-    private int numPais;
+	@Id
+	@Column(name = "numpais")
+	private int numPais;
 
-    public int getNumPais() {
+	public int getNumPais() {
 		return numPais;
 	}
 
@@ -18,24 +18,13 @@ public class Pais {
 	}
 
 	@Column(name = "nome")
-    private String nome;
+	private String nome;
 
-    public String getNome() {
+	public String getNome() {
 		return nome;
 	}
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	@Column(name = "nClubes")
-    private int nClubes;
-
-	public int getnClubes() {
-		return nClubes;
-	}
-
-	public void setnClubes(int nClubes) {
-		this.nClubes = nClubes;
 	}
 }

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Games Chart</title>
+    <script src="/webjars/chartjs/3.7.1/dist/chart.min.js"></script>
+</head>
+<body>
+    <canvas id="gamesChart"></canvas>
+    
+    <script th:inline="javascript">
+        var jogos = /*[[${gameIds}]]*/ [];
+        var numMoves = /*[[${numMoves}]]*/ [];
+        
+        var ctx = document.getElementById('gamesChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: jogos,
+                datasets: [{
+                    label: 'Número de movimentos',
+                    data: numMoves,
+                    fill: false,
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        stepSize: 1
+                    },
+                    x: {
+                            title: {
+                                display: true,
+                                text: 'ID do Jogo'
+                            }
+                        }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

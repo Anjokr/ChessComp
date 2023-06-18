@@ -14,4 +14,11 @@ public interface JogoRepository extends JpaRepository<Jogo, Integer> {
 
     @Query("SELECT j FROM Jogo j WHERE j.arbitro.numassoc = :numassoc")
     List<Jogo> findJogosByArbitro(@Param("numassoc") Integer numassoc);
+
+    @Query("SELECT j.idjogo, COUNT(m) " +
+            "FROM Jogo j " +
+            "JOIN Movimento m ON m.eidjogo = j " +
+            "GROUP BY j.idjogo " +
+            "ORDER BY j.idjogo")
+    List<Object[]> getGamesData();
 }
