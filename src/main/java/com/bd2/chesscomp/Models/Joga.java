@@ -3,38 +3,58 @@ package com.bd2.chesscomp.Models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "joga")
+@Table(name = "joga", schema = "public")
+@IdClass(JogaId.class)
 public class Joga {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idjoga")
-	private int idjoga;
+	@Column(name = "eidjogo")
+	private Integer jogo;
+
+	@Id
+	@Column(name = "enumjogador")
+	private Integer jogador;
 
 	@ManyToOne
-	@JoinColumn(name = "eidjogo")
-	private Jogo jogo;
+	@JoinColumn(name = "eidjogo", referencedColumnName = "idjogo", insertable = false, updatable = false)
+	private Jogo jogoObj;
 
 	@ManyToOne
-	@JoinColumn(name = "enumjogador")
-	private Jogador jogador;
+	@JoinColumn(name = "enumjogador", referencedColumnName = "enumassoc", insertable = false, updatable = false)
+	private Jogador jogadorObj;
 
 	@Column(name = "cor")
 	private String cor;
 
-	public int getEidjogo() {
-		return idjoga;
+	public Integer getJogo() {
+		return jogo;
 	}
 
-	public void setEidjogo(int eidjogo) {
-		this.idjoga = eidjogo;
+	public void setJogo(Integer jogo) {
+		this.jogo = jogo;
 	}
 
-	public Jogador getEnumjogador() {
+	public Integer getJogador() {
 		return jogador;
 	}
 
-	public void setEnumjogador(Jogador enumjogador) {
-		this.jogador = enumjogador;
+	public void setJogador(Integer jogador) {
+		this.jogador = jogador;
+	}
+
+	public Jogo getJogoObj() {
+		return jogoObj;
+	}
+
+	public void setJogoObj(Jogo jogoObj) {
+		this.jogoObj = jogoObj;
+	}
+
+	public Jogador getJogadorObj() {
+		return jogadorObj;
+	}
+
+	public void setJogadorObj(Jogador jogadorObj) {
+		this.jogadorObj = jogadorObj;
 	}
 
 	public String getCor() {
@@ -44,5 +64,4 @@ public class Joga {
 	public void setCor(String cor) {
 		this.cor = cor;
 	}
-
 }

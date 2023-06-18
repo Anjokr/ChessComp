@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,13 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bd2.chesscomp.Models.Participante;
 import com.bd2.chesscomp.Models.Hotel;
+import com.bd2.chesscomp.Models.Joga;
 import com.bd2.chesscomp.Models.Jogador;
 import com.bd2.chesscomp.Models.Jogo;
 import com.bd2.chesscomp.Models.Schedule;
 import com.bd2.chesscomp.Repository.HotelRepository;
+import com.bd2.chesscomp.Repository.JogaRepository;
 import com.bd2.chesscomp.Repository.JogoRepository;
 import com.bd2.chesscomp.Repository.ParticipanteRepository;
-import java.time.*;
 
 @RestController
 public class GenericController {
@@ -28,6 +28,10 @@ public class GenericController {
     JogoRepository jogoRepository;
     @Autowired
     HotelRepository hotelRepository;
+    @Autowired
+    JogaRepository jogaRepository;
+    @Autowired
+    ParticipanteRepository participanteRepository;
 
     @RequestMapping("/")
     public String home() {
@@ -56,6 +60,15 @@ public class GenericController {
             schedule.setHotel(jogo.getSalao().getHotel().getNomehotel());
 
             schedule.setArbitro(jogo.getArbitro().getNomeAssoc());
+
+            List<Joga> joga = jogaRepository.findAllByJogoId(jogo.getIdJogo());
+
+            String nomeJogador1 = participanteRepository.findNomeAssocByEnumJogador(joga.get(0).getJogador());
+            String nomeJogador2 = participanteRepository.findNomeAssocByEnumJogador(joga.get(0).getJogador());
+
+            schedule.setJogador1(nomeJogador1);
+            schedule.setJogador2(nomeJogador2);
+
             schedules.add(schedule);
         }
 
@@ -63,8 +76,9 @@ public class GenericController {
     }
 
     @GetMapping("/getGamesByHotel")
-    public ResponseEntity<Jogo> getGamesByHotel(@RequestBody Hotel hotel) {
-        return new ResponseEntity<Jogo>(null);
+    public @ResponseBody List<Jogo> getGamesByHotel(@RequestBody Hotel hotel) {
+
+        return null;
     }
 
     @GetMapping("/getGamesByPlayer")
