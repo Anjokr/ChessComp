@@ -1,12 +1,10 @@
-
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
 <title>Home</title>
 </head>
 <body>
-	<h1>Welcome to ChessComp repository!</h1>
+	<h1>ChessComp!</h1>
 
 	<a href="/getSchedule">Clique aqui para saber programação de jogos!</a>
 	<br><br>
@@ -17,7 +15,7 @@
 	<form action="/getGamesByHotel" method="post">
 		<input type="text" name="username" /><input type="submit" value="Submit" />
 	</form>
-	<h4>Jogador (digite o número associado do jogador)</h4>
+	<h4>Jogador (digite o nome do jogador)</h4>
 	<form action="/getGamesByPlayer" method="post">
 		<input type="text" name="username" /><input type="submit" value="Submit" />
 	</form>
@@ -25,5 +23,8 @@
 	<form action="/getGamesByReferee" method="post">
 		<input type="text" name="username" /><input type="submit" value="Submit" />
 	</form>
+
+	<a href="/curva-movimentoXjogo">Ver curva de jogos por número de movimentos</a><br>
+	<a href="/jogadores-por-pais">Ver cruva de jogadores por país</a>
 </body>
 </html>
